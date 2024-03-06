@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='dashboard.css') }}">
+    <title>Modern Navigation Bar</title>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+
+    <div class="content">
+        <h1>Narendra Panwar</h1>
+    </div>
+
+    <div class="menu">
+        <a href="#" class="active">Home</a>
+        <a href="#">Contact</a>
+        <a href="#">Logout</a>
+    </div>
+    <div class="burger-menu" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+</div>
+
+<header id="page-header" class="header-maxwidth d-print-none">
+    <div>
+        <h2 class="mb-3 mt-3">
+            Welcome back, Aadarsh! 👋
+        </h2>
+    </div>   
+</header>
+<section class="active-tests">
+    <h2>Active Tests</h2>
+    <div class="test-container">
+        <div class="test">
+            <div class="test-info">
+                <h3>Test Name 1</h3>
+                <p>Date: March 10, 2024</p>
+                <p>Topic: Mathematics</p>
+            </div>
+            
+            <button class="start-test-button"><a href="{{ url_for('testpaper') }}">Start Test</a></button>
+        </div>
+    </div>
+</section>
+
+<section class="upcoming-tests">
+    <h2>Upcoming Tests Calendar</h2>
+    <!-- Add your content for upcoming/active tests here -->
+    <div class="test-container">
+        <div class="up_test">
+            <div class="test-info">
+                <h3>Test Name 1</h3>
+                <p>Date: March 10, 2024</p>
+                <p>Topic: Mathematics</p>
+            </div>
+        </div>
+        <div class="up_test">
+            <div class="up_test_info">
+                <h3>Test Name 2</h3>
+                <p>Date: March 10, 2024</p>
+                <p>Topic: Mathematics</p>
+            </div>
+        </div>
+        <div class="up_test">
+            <div class="up_test_info">
+                <h3>Test Name 3</h3>
+                <p>Date: March 10, 2024</p>
+                <p>Topic: Mathematics</p>
+            </div>
+
+        </div>
+        <div class="up_test">
+            <div class="up_test_info">
+                <h3>Test Name 4</h3>
+                <p>Date: March 10, 2024</p>
+                <p>Topic: Mathematics</p>
+            </div>
+        </div>
+        <div class="up_test">
+            <div class="up_test_info">
+                <h3>Test Name 5</h3>
+                <p>Date: March 10, 2024</p>
+                <p>Topic: Mathematics</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    padding: 2px;
+}
+
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #575757;
+}
+
+.question {
+    margin-bottom: 5px;
+}
+
+.question-text {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.options {
+    list-style-type: none;
+    padding: 0;
+    text-align: left; /* Align text to the left within the options */
+}
+
+.option {
+    margin: 8px 0;
+}
+
+label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+    color: #ff0000;
+}
+
+.submit-button, .next-page-button, .prev-page-button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+    .question {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    .submit-button, .next-page-button, .Prev-page-button {
+        font-size: 14px;
+    }
+}

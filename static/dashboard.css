@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;  
+}
+
+.navbar {
+    background-color: #000000;
+    overflow: hidden;
+    padding: 2px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.2);
+    height:65px;
+    display: flex;
+    justify-content: space-between;
+}
+.content{
+    font-size:12px;
+    color: #ddd;
+    
+    
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.menu a:hover {
+    color: #00bcd4;
+}
+
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+}
+
+/* Section styles */
+section {
+    margin: 20px;
+    
+}
+
+.active-tests, .calendar ,.upcoming-tests{
+    background-color: #fff;
+    padding: 15px;
+    
+    border-radius: 10px;
+    opacity: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.active-tests h2, .calendar h2,.upcoming-tests {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.test-container {
+    display: flex;
+    justify-content: space-between;
+    
+
+    
+}
+
+.test {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    margin-bottom: 5px;
+    width: 100%;
+}
+.up_test {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 5px;
+    
+}
+
+.test-info ,.up_test_info{
+    flex-grow: 1;
+}
+
+.start-test-button {
+
+    background-color: #007bff6f;
+    
+    color: #007BFF;
+    font-size: medium;
+    font-weight: bold;
+    margin-right: auto;
+    border: none;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.calendar-container {
+    /* Add your calendar styles here */
+}
+
+@media only screen and (max-width: 768px) {
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        background-color: #333;
+        z-index: 1;
+    }
+
+    .menu.active {
+        display: flex;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+}
