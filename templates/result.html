@@ -16,6 +16,19 @@
         <p>Total Score: {{ result_details.total_score }}</p>
         <p>Correct Answers: {{ result_details.correct_answers_count }}</p>
         <p>Unattempted Questions: {{ result_details.unattempted_count }}</p>
+
+
+        
+        <form action="{{ url_for('dashboard') }}" class="btn-container">
+            <button  class="btn" type="submit">Go to Dashboard</button>
+        </form>
+
+        <form action="{{ url_for('testpaper') }}" class="btn-container">
+            <button class="btn btn-secondary" type="submit">Start Test Again</button>
+        </form>
+
     </section>
+    
+
 </body>
 </html>

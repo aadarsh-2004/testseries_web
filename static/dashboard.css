@@ -22,6 +22,9 @@ body {
 
 .logo img {
     max-height: 50px;
+    border-radius: 15px;
+    margin-left: 10px;
+    margin-top: 6px;
 }
 
 .menu {
@@ -110,9 +113,9 @@ section {
 
 .start-test-button {
 
-    background-color: #007bff6f;
+    background-color: #000000;
     
-    color: #007BFF;
+    color: #ffffff;
     font-size: medium;
     font-weight: bold;
     margin-right: auto;
@@ -121,9 +124,7 @@ section {
     border-radius: 8px;
     cursor: pointer;
 }
-.calendar-container {
-    /* Add your calendar styles here */
-}
+
 
 @media only screen and (max-width: 768px) {
     .menu {
@@ -143,5 +144,26 @@ section {
 
     .burger-menu {
         display: flex;
+    }
+    .up_test {
+        /* Adjust styles for smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+        margin-bottom: 10px; /* Adjust margin between items for smaller screens */
+    }
+
+    .up_test_info {
+        /* Adjust styles for test information in smaller screens */
+        margin-top: 5px;
+    }
+
+    /* Use flex-wrap to display items in multiple rows */
+    .test-container {
+        flex-wrap: wrap;
+        
+    }
+
+    .up_test {
+        width: calc(50% - 10px); /* Display in two columns, adjust as needed */
+        align-items: center;
     }
 }

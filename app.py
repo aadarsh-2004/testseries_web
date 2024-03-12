@@ -64,7 +64,7 @@ def signup():
 
         # Perform signup logic and database operations
         insert_user_query = "INSERT INTO users (username, password, subscription) VALUES (%s, %s, %s)"
-        cursor.execute(insert_user_query, (username, password, "True"))
+        cursor.execute(insert_user_query, (username, password, "False"))
 
         # Commit changes to the database
         db.commit()
@@ -75,7 +75,8 @@ def signup():
     # Render the signup page for GET requests
     return render_template('signup.html')
 
-@app.route('/testpaper')
+
+@app.route('/testpaper', methods=['GET', 'POST'])
 def testpaper():
     # Check if the user is logged in
     if 'username' in session:
@@ -86,24 +87,12 @@ def testpaper():
 
         # Check if the subscription status is 'True' (case insensitive)
         if subscription_status.lower() == 'true':
-            # Get the page number from the request parameters (default to 1 if not provided)
-            page_number = int(request.args.get('page', 1))
-
-            # Calculate the offset based on the page number
-            offset = (page_number - 1) * 10  # Assuming 10 questions per page
-
-            # Fetch total number of questions from the database
-            cursor.execute("SELECT COUNT(*) FROM questions")
-            total_questions = cursor.fetchone()[0]
-
-            # Calculate the total number of pages
-            total_pages = (total_questions + 9) // 10  # Assuming 10 questions per page
-
-            # Fetch questions from the database for the specified page
-            cursor.execute(f"SELECT * FROM questions LIMIT 10 OFFSET {offset}")
+            # Fetch all questions from the database
+            cursor.execute("SELECT * FROM questions")
             questions = cursor.fetchall()
 
-            return render_template('testpaper.html', questions=questions, page_number=page_number, total_pages=total_pages)
+            # Render the HTML template with all questions
+            return render_template('testpaper.html', questions=questions)
             
         else:
             flash('You are not subscribed. Please subscribe to access the test paper.', 'error')
@@ -113,27 +102,20 @@ def testpaper():
         return redirect(url_for('index'))
 
 
-
-# Route to display the questions
+# Route to display all questions on one page
 @app.route('/questions')
-def display_questions():
-    # Get the page number from the request parameters (default to 1 if not provided)
-    page_number = int(request.args.get('page', 1))
-
-    # Calculate the offset based on the page number
-    offset = (page_number - 1) * 10  # Assuming 10 questions per page
-
-
-    # Fetch questions from the database for the specified page
-    cursor.execute(f"SELECT * FROM questions LIMIT 10 OFFSET {offset}")
+def display_all_questions():
+    # Fetch all questions from the database
+    cursor.execute("SELECT * FROM questions")
     questions = cursor.fetchall()
 
-    # Render the HTML template with the fetched questions
-    return render_template('testpaper.html', questions=questions, page_number=page_number)
+    # Render the HTML template with all questions
+    return render_template('testpaper.html', questions=questions)
 
 @app.route('/submit', methods=['POST'])
 def submit_test():
     if 'username' in session:
+        
         # Fetch correct answers from the database (fetch only once)
         cursor.execute("SELECT question_id, correct_answer FROM questions")
         correct_answers_data = cursor.fetchall()
@@ -144,7 +126,7 @@ def submit_test():
         for key, value in request.form.items():
             if key.startswith('q'):
                 question_id = key[1:]
-                user_answer = value.lower()
+                user_answer = value.upper()  # Convert to uppercase for consistency
                 submitted_answers[question_id] = user_answer
 
         # Print form data for debugging
@@ -162,9 +144,6 @@ def submit_test():
         for question_id, correct_answer in correct_answers.items():
             user_answer = submitted_answers.get(question_id, '')
 
-            # Convert user answer to uppercase
-            user_answer = user_answer.upper()
-
             # Debugging: print submitted answers
             print(f"Question {question_id}: User - {user_answer}, Correct - {correct_answer}")
 
@@ -180,11 +159,43 @@ def submit_test():
             'unattempted_count': unattempted_count
         }
 
-        # For AJAX response, return JSON instead of rendering the template
-        return jsonify(result_details)
+        
+
+        # Render the result template and pass the result details
+        return render_template('result.html', result_details=result_details)
+
     else:
         # If the user is not logged in, redirect to the login page
         flash('Please log in to submit the test.', 'error')
+        return redirect(url_for('index'))
+
+@app.route('/result')
+def display_result():
+
+    # You can add more logic here if needed
+    return render_template('result.html')
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    if 'username' in session:
+        # Retrieve subscription form data
+        payment_method = request.form['payment_method']
+        amount = request.form['amount']
+
+        # Fetch any unread results from the previous query
+        cursor.fetchall()
+
+        # Update the user's subscription status in the database
+        update_subscription_query = "UPDATE users SET subscription = %s WHERE username = %s"
+        cursor.execute(update_subscription_query, ("True", session['username']))
+
+        # Commit changes to the database
+        db.commit()
+
+        flash('Subscription successful. You can now access the test paper.', 'success')
+        return redirect(url_for('dashboard'))
+    else:
+        # If the user is not logged in, redirect to the login page
+        flash('Please log in to subscribe.', 'error')
         return redirect(url_for('index'))
 
 if __name__ == '__main__':

@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='subscribe.css') }}">
+    <title>Subscribe</title>
+    
 </head>
 <body>
-    <h1>Subscribe</h1>
+    <div class="subscription-container">
+        <h1>Subscribe to Access the Test Paper</h1>
+        
+        <!-- Add your subscription form here -->
+        <form method="post" action="{{ url_for('subscribe') }}">
+            <!-- Add subscription form fields here -->
+            <label for="payment_method">Payment Method:</label>
+            <input type="text" id="payment_method" name="payment_method" required>
+
+            <label for="amount">Amount:</label>
+            <input type="text" id="amount" name="amount" required>
+
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
 </body>
 </html>

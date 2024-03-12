@@ -16,11 +16,11 @@ section {
     margin: 2em;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
     padding: 20px;
 }
 
-h1, {
+h1 {
     color: #ffffff;
 }
 
@@ -31,20 +31,42 @@ h2 {
 }
 
 p {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    font-weight: bold;
     margin: 15px 0;
 }
 
-.score-bar {
-    height: 20px;
-    background-color: #4CAF50;
-    border-radius: 5px;
-    margin-top: 10px;
-    overflow: hidden;
+/* Button Styles */
+.btn-container {
+    text-align: center;
+    margin-top: 20px;
 }
 
-.score-fill {
-    height: 100%;
-    width: {{ result_details.total_score_percentage }}%;
-    background-color: #8BC34A;
+.btn {
+    
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.btn-secondary {
+    background-color: #000000;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 600px) {
+    section {
+        margin: 1em;
+    }
+
+    .btn {
+        display: block;
+        margin: 10px auto;
+    }
 }

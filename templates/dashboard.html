@@ -10,7 +10,7 @@
 
 <div class="navbar">
     <div class="logo">
-        <img src="logo.png" alt="Logo">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
     </div>
 
     <div class="content">
@@ -19,8 +19,8 @@
 
     <div class="menu">
         <a href="#" class="active">Home</a>
-        <a href="#">Contact</a>
-        <a href="#">Logout</a>
+        <a href="{{ url_for('dashboard') }}">Contact</a>
+        <a  href="{{ url_for('index') }}">Logout</a>
     </div>
     <div class="burger-menu" onclick="toggleMenu()">
         <div class="bar"></div>
@@ -41,12 +41,13 @@
     <div class="test-container">
         <div class="test">
             <div class="test-info">
-                <h3>Test Name 1</h3>
-                <p>Date: March 10, 2024</p>
-                <p>Topic: Mathematics</p>
+                <h3>REET MCQs</h3>
+                <h5>Date: March 10, 2024</h5>
+                <h5>Start Time: 11:00 End Time: 11:00</h5>
+                <h5>Topic: General Knowledge For REET </h5>
             </div>
+            <button class="start-test-button"  onclick="startTest()">Start Test</button>
             
-            <button class="start-test-button"><a href="{{ url_for('testpaper') }}">Start Test</a></button>
         </div>
     </div>
 </section>
@@ -57,42 +58,33 @@
     <div class="test-container">
         <div class="up_test">
             <div class="test-info">
-                <h3>Test Name 1</h3>
-                <p>Date: March 10, 2024</p>
+                <h3>Test Name </h3>
+                <p>Date: March 15, 2024</p>
                 <p>Topic: Mathematics</p>
             </div>
         </div>
-        <div class="up_test">
-            <div class="up_test_info">
-                <h3>Test Name 2</h3>
-                <p>Date: March 10, 2024</p>
-                <p>Topic: Mathematics</p>
-            </div>
-        </div>
-        <div class="up_test">
-            <div class="up_test_info">
-                <h3>Test Name 3</h3>
-                <p>Date: March 10, 2024</p>
-                <p>Topic: Mathematics</p>
-            </div>
+        
+        
 
-        </div>
-        <div class="up_test">
-            <div class="up_test_info">
-                <h3>Test Name 4</h3>
-                <p>Date: March 10, 2024</p>
-                <p>Topic: Mathematics</p>
-            </div>
-        </div>
-        <div class="up_test">
-            <div class="up_test_info">
-                <h3>Test Name 5</h3>
-                <p>Date: March 10, 2024</p>
-                <p>Topic: Mathematics</p>
-            </div>
-        </div>
+        
     </div>
 </section>
+<script>
+    function startTest() {
+        const currentTime = new Date();
+        const allowedStartTime = new Date("March 7, 2024 11:00:00 GMT+0530"); // Replace with your desired start time
+        const allowedEndTime = new Date("March 30, 2024 13:00:00 GMT+0530");   // Replace with your desired end time
+
+        if (currentTime >= allowedStartTime && currentTime <= allowedEndTime) {
+            // Redirect to the test paper page or perform other actions
+            window.location.href = '{{ url_for('testpaper') }}';
+        } else if (currentTime < allowedStartTime) {
+            alert('The test is not available yet.');
+        } else {
+            alert('The test has ended.');
+        }
+    }
+</script>
 
 </body>
 </html>

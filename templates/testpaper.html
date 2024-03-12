@@ -7,13 +7,13 @@
     <title>Test Series Questions</title>
 </head>
 <body>
-    <form method="post" action="/submit">
+    <form method="post" action="/submit" id="testForm">
         <header>
             <h1>Test Series Questions</h1>
         </header>
 
         <section id="questions">
-            <h2>Page {{ page_number }}</h2>
+            <h2>All Questions</h2>
 
             {% for question in questions %}
                 <div class="question">
@@ -24,33 +24,27 @@
                         <li class="option"><label><input type="radio" name="q{{ question[0] }}" value="c"> {{ question[4] }}</label></li>
                         <li class="option"><label><input type="radio" name="q{{ question[0] }}" value="d"> {{ question[5] }}</label></li>
                     </ul>
+                    
+                    <!-- Hidden input field to store the selected answer for each question -->
+                    <input type="hidden" id="hidden-answer-{{ question[0] }}" name="hidden-answer-{{ question[0] }}" value="">
                 </div>
             {% endfor %}
 
-            <!-- Add navigation buttons with improved logic -->
+            <!-- Submit button -->
             <div class="navigation-buttons">
-                {% if page_number > 1 %}
-                    <a class="prev-page-button" href="{{ url_for('testpaper', page=page_number-1) }}">Previous Page</a>
-                {% else %}
-                    <button class="prev-page-button" disabled>Previous Page</button>
-                {% endif %}
-                
-                {% if page_number < total_pages %}
-                    <a class="next-page-button" href="{{ url_for('testpaper', page=page_number+1) }}">Next Page</a>
-                {% else %}
-                    <button class="submit-button" type="submit">Submit Test</button>
-                {% endif %}
+                <button class="submit-button" type="submit">Submit Test</button>
             </div>
         </section>
     </form>
 
     <script>
-        function nextPage(pageNumber) {
-            window.location.href = `?page=${pageNumber}`;
-        }
-
-        function prevPage(pageNumber) {
-            window.location.href = `?page=${pageNumber}`;
+        function includeCurrentPageAnswers() {
+            const radioInputs = document.querySelectorAll('input[type="radio"]:checked');
+            radioInputs.forEach(input => {
+                const questionId = input.name.substring(1);
+                const answer = input.value;
+                document.getElementById(`hidden-answer-${questionId}`).value = answer;
+            });
         }
     </script>
 </body>
